@@ -10,39 +10,28 @@ const Home = () => {
   const { t } = useTranslation("app");
   const issues = [
     {
-      icon: "🐞",
-      title:
-        'Console error: Warning: Each child in a list should have a unique "key" prop.',
-      description:
-        "Hope you are able to find what is causing this error, as it is annoying."
+      type: "bug",
+      key: "key"
     },
     {
-      icon: "🐞",
-      title:
-        'The word "known" should be displayed bold in the introduction text.',
-      description:
-        "When implementing a solution, please ensure to not change the i18n text."
+      type: "bug",
+      key: "bold"
     },
     {
-      icon: "🐞",
-      title:
-        "User avatar in app bar is missing, although user should be fetched on app start correctly.",
-      description:
-        "On app start we load the current user object via a MobX store, but for any reason the user avatar is not displayed in the top right of the app bar. Attention: When solving this issue, you might will be confronted with a second bug."
+      type: "bug",
+      key: "avatar"
     },
     {
-      icon: "🐞",
-      title: "Optional: Countdown is broken sometimes (hard to reproduce).",
-      description:
-        "Some developers mentioned that the countdown in the app header behaves strange sometimes, but unfortunately they were not able to reproduce this glitch reliably, maybe you find the root cause."
+     type: "bug",
+      key: "countdown"
     },
     {
-      icon: "⭐️",
-      title: "Optional: It would be great to be able to switch the language.",
-      description:
-        "Please add a language select control in the app bar to swicth the UI language between english and german."
+      type: "optional",
+      key: "language"
     }
   ];
+  const renderIcon = (type: string) =>
+    type === "bug" ? "🐞" : "⭐";
 
   return (
     <Box p={2} maxHeight="calc(100vh - 64px)" overflow={["auto", "auto"]}>
@@ -60,11 +49,11 @@ const Home = () => {
           {issues.map((issue, index) => (
             <ListItem key={index}>
               <Typography variant="h5" sx={{ p: 2 }}>
-                {issue.icon}
+                {renderIcon(issue.type)}
               </Typography>
               <ListItemText
-                primary={issue.title}
-                secondary={issue.description}
+                primary={t(`issues.${issue.key}.title`)}
+                secondary={t(`issues.${issue.key}.description`)}
               />
             </ListItem>
           ))}

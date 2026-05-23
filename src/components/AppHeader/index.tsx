@@ -1,10 +1,12 @@
-import { Grow, Box, Theme, Toolbar, Typography } from "@mui/material";
+import { Grow, Box, Theme, Toolbar, Typography, Button } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { styled, useTheme } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { User } from "../../api/services/User/store";
 import AvatarMenu from "../AvatarMenu";
+import i18n from 'i18next'
+import _ from "lodash";
 
 interface AppBarProps extends MuiAppBarProps {
   theme?: Theme;
@@ -43,10 +45,18 @@ const AppHeader = React.forwardRef((props: AppHeaderProps, ref) => {
   const countdownSeconds = (countdown % 60).toFixed(0).padStart(2, "0");
 
   useEffect(() => {
-    setInterval(() => {
-      setCount((c) => c + 1);
-    }, 1000);
-  }, []);
+  if (count >= seconds) return;
+  
+  const interval = setInterval(() => {
+    setCount((c) => c + 1);
+  }, 1000);
+
+  return () => clearInterval(interval);
+  }, [count]);
+
+  const changeLanguage = (lng : "en" | "de") =>{
+    i18n.changeLanguage(lng)
+  }
 
   return (
     <AppBar ref={ref} position="fixed" sx={{ width: "100vw" }}>
@@ -78,6 +88,10 @@ const AppHeader = React.forwardRef((props: AppHeaderProps, ref) => {
             >
               {pageTitle.toLocaleUpperCase()}
             </Typography>
+          </Box>
+          <Box sx={{display: "flex", gap: 1, alignItems:"center", mr: 1 }}>
+              <Button onClick={()=> changeLanguage('en')} size="small">EN</Button>
+              <Button onClick={()=> changeLanguage('de')} size="small">DE</Button>
           </Box>
           <Box sx={{ flex: 1, justifyContent: "flex-end", display: "flex" }}>
             {user && user.eMail && (
