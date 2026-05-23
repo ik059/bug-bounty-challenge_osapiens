@@ -57,8 +57,8 @@ const Home = () => {
           {t("home.sidenote")}
         </Typography>
         <List>
-          {issues.map((issue) => (
-            <ListItem>
+          {issues.map((issue, index) => (
+            <ListItem key={index}>
               <Typography variant="h5" sx={{ p: 2 }}>
                 {issue.icon}
               </Typography>
