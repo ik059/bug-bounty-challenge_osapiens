@@ -11,7 +11,7 @@ interface AppBarProps extends MuiAppBarProps {
 }
 
 interface AppHeaderProps {
-  user: User;
+  user: User | null;
   pageTitle: string;
 }
 
@@ -82,7 +82,9 @@ const AppHeader = React.forwardRef((props: AppHeaderProps, ref) => {
           <Box sx={{ flex: 1, justifyContent: "flex-end", display: "flex" }}>
             {user && user.eMail && (
               <Grow in={Boolean(user && user.eMail)}>
-                <AvatarMenu user={user} />
+                <Box>
+                  <AvatarMenu user={user} />
+                </Box>
               </Grow>
             )}
           </Box>
