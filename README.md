@@ -1,5 +1,11 @@
+
 ## Running the App
 ```bash
+git clone https://github.com/ik059/bug-bounty-challenge_osapiens.git
+cd bug-bounty-challenge_osapiens
+npm install
+npm run dev
+```
 npm install
 npm run dev
 ```
