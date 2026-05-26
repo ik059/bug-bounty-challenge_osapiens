@@ -7,6 +7,7 @@ import { User } from "../../api/services/User/store";
 import AvatarMenu from "../AvatarMenu";
 import i18n from 'i18next'
 import _ from "lodash";
+import { observer } from 'mobx-react'
 
 interface AppBarProps extends MuiAppBarProps {
   theme?: Theme;
@@ -108,4 +109,4 @@ const AppHeader = React.forwardRef((props: AppHeaderProps, ref) => {
   );
 });
 
-export default AppHeader;
+export default observer(AppHeader);
