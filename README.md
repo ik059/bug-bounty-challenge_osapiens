@@ -6,9 +6,6 @@ cd bug-bounty-challenge_osapiens
 npm install
 npm run dev
 ```
-npm install
-npm run dev
-```
 
 ## Running Tests
 ```bash
